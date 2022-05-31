@@ -1,19 +1,17 @@
 //
-//  ViewController.swift
+//  Probni.swift
 //  SportsApp
 //
 //  Created by FIVE on 31.05.2022..
 //
 
+import Foundation
 import UIKit
 
-class ViewController: UIViewController {
-
+class Probni: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        view.backgroundColor = .red
     }
-
-
 }
-
