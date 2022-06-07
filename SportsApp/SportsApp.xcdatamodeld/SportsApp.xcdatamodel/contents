@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Game" representedClassName="Game" syncable="YES"/>
-    <entity name="Group" representedClassName="Group" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="Team" representedClassName="Team" syncable="YES"/>
+    <entity name="Prediction" representedClassName="Prediction" syncable="YES" codeGenerationType="class"/>
     <elements>
-        <element name="Group" positionX="-63" positionY="-18" width="128" height="44"/>
-        <element name="Game" positionX="-54" positionY="0" width="128" height="29"/>
-        <element name="Team" positionX="-36" positionY="9" width="128" height="29"/>
+        <element name="Prediction" positionX="-63" positionY="-18" width="128" height="29"/>
     </elements>
 </model>

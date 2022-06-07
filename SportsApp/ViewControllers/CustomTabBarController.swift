@@ -28,7 +28,7 @@ class CustomTabBarController: UITabBarController {
         
         self.viewControllers = [
             createTabBarItem(tabBarTitle: "Home", tabBarImage: UIImage(systemName: "house")!, viewController: sportsViewController),
-            createTabBarItem(tabBarTitle: "Favorites", tabBarImage: UIImage(systemName: "heart")!, viewController: favoritesController)
+            createTabBarItem(tabBarTitle: "Past", tabBarImage: UIImage(systemName: "hourglass")!, viewController: favoritesController)
         ]
     }
     

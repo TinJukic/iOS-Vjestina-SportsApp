@@ -28,6 +28,7 @@ class NetworkService {
             
             var value: T!
             do {
+                print(data.first)
                 value = try JSONDecoder().decode(T.self, from: data)
             } catch let jsonError as NSError {
                 print("JSON ERROR \(jsonError)")

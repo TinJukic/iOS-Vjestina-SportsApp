@@ -12,6 +12,8 @@ import CoreData
 
 class FavoritesController: UIViewController {
     var favoritesView: FavoritesView!
+    var context: NSManagedObjectContext!
+    var sportsRepository: SportsRepository!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +27,15 @@ class FavoritesController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
+        self.context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        self.sportsRepository = SportsRepository(managedContext: context)
+        
         buildViews()
         addConstraints()
     }
     
     func buildViews() {
-        favoritesView = FavoritesView()
+        favoritesView = FavoritesView(sportsRepository: sportsRepository)
         view.addSubview(favoritesView)
     }
     

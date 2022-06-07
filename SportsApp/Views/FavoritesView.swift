@@ -10,13 +10,17 @@ import PureLayout
 import UIKit
 
 class FavoritesView: UIView {
-    var favoritesLabel: UILabel!
-    var favoritesCollection: UICollectionView!
+    var sportsCollectionView: UICollectionView!
+    var sportsRepository: SportsRepository!
     
-    init() {
+    init(sportsRepository: SportsRepository) {
         super.init(frame: .zero)
         
-        backgroundColor = .brown
+        backgroundColor = .white
+        self.sportsRepository = sportsRepository
+        self.sportsRepository.sportsNetworkDataSource?.getPastPerformances { (pastPerformances) in
+            print(pastPerformances)
+        }
         
         buildViews()
         addConstraints()
@@ -27,15 +31,47 @@ class FavoritesView: UIView {
     }
     
     func buildViews() {
-        favoritesLabel = UILabel()
-        favoritesLabel.text = "Favorites"
-        favoritesLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        addSubview(favoritesLabel)
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .vertical
+        sportsCollectionView = UICollectionView(
+            frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height),
+            collectionViewLayout: flowLayout
+        )
+        self.addSubview(sportsCollectionView)
+        sportsCollectionView.register(SportsViewCollectionCell.self, forCellWithReuseIdentifier: SportsViewCollectionCell.cellIdentifier)
+        sportsCollectionView.dataSource = self
+        sportsCollectionView.delegate = self
     }
     
     func addConstraints() {
-        favoritesLabel.autoPinEdge(toSuperviewSafeArea: .top, withInset: 0)
-        favoritesLabel.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 0)
-        favoritesLabel.autoPinEdge(toSuperviewSafeArea: .trailing, withInset: 0)
+        sportsCollectionView.autoPinEdgesToSuperviewEdges()
+    }
+}
+
+extension FavoritesView: UICollectionViewDataSource {
+    func collectionView(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SportsViewCollectionCell.cellIdentifier, for: indexPath) as! SportsViewCollectionCell
+        return cell
+    }
+}
+
+extension FavoritesView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//      logic when cell is selected
+        print("Clicked on cell number \(indexPath.row)")
+    }
+}
+
+extension FavoritesView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.bounds.width, height: 140)
     }
 }

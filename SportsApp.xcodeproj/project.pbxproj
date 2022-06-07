@@ -22,6 +22,8 @@
 		5215F5FE28467EA30089DF85 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5215F5FD28467EA30089DF85 /* SearchBarView.swift */; };
 		5215F6002846815D0089DF85 /* SearchSportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5215F5FF2846815D0089DF85 /* SearchSportsView.swift */; };
 		5215F602284685390089DF85 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5215F601284685390089DF85 /* FavoritesView.swift */; };
+		5257A8E52847A18700D7DA8E /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5257A8E42847A18700D7DA8E /* Structs.swift */; };
+		526D7B5A284FC6BC0085F671 /* SportsViewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526D7B59284FC6BC0085F671 /* SportsViewCollectionCell.swift */; };
 		52F5FDC0284655F400B1E36D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F5FDBF284655F400B1E36D /* AppDelegate.swift */; };
 		52F5FDC2284655F400B1E36D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F5FDC1284655F400B1E36D /* SceneDelegate.swift */; };
 		52F5FDCA284655F400B1E36D /* SportsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 52F5FDC8284655F400B1E36D /* SportsApp.xcdatamodeld */; };
@@ -45,6 +47,8 @@
 		5215F5FD28467EA30089DF85 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		5215F5FF2846815D0089DF85 /* SearchSportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSportsView.swift; sourceTree = "<group>"; };
 		5215F601284685390089DF85 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		5257A8E42847A18700D7DA8E /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
+		526D7B59284FC6BC0085F671 /* SportsViewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsViewCollectionCell.swift; sourceTree = "<group>"; };
 		52F5FDBC284655F400B1E36D /* SportsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F5FDBF284655F400B1E36D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52F5FDC1284655F400B1E36D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 				5215F5FD28467EA30089DF85 /* SearchBarView.swift */,
 				5215F5FF2846815D0089DF85 /* SearchSportsView.swift */,
 				5215F601284685390089DF85 /* FavoritesView.swift */,
+				526D7B59284FC6BC0085F671 /* SportsViewCollectionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			children = (
 				52F5FDBF284655F400B1E36D /* AppDelegate.swift */,
 				52F5FDC1284655F400B1E36D /* SceneDelegate.swift */,
+				5257A8E42847A18700D7DA8E /* Structs.swift */,
 				52F5FDD6284657FA00B1E36D /* ViewControllers */,
 				5215F5E428465BC70089DF85 /* Views */,
 				5215F5EB284661900089DF85 /* DataSaving */,
@@ -230,9 +236,11 @@
 				5215F602284685390089DF85 /* FavoritesView.swift in Sources */,
 				5215F5E828465CAD0089DF85 /* NoInternetConnectionView.swift in Sources */,
 				52F5FDCA284655F400B1E36D /* SportsApp.xcdatamodeld in Sources */,
+				5257A8E52847A18700D7DA8E /* Structs.swift in Sources */,
 				5215F5E1284659060089DF85 /* SportsViewController.swift in Sources */,
 				52F5FDD82846583300B1E36D /* CustomTabBarController.swift in Sources */,
 				52F5FDC2284655F400B1E36D /* SceneDelegate.swift in Sources */,
+				526D7B5A284FC6BC0085F671 /* SportsViewCollectionCell.swift in Sources */,
 				5215F5F5284662680089DF85 /* NetworkService.swift in Sources */,
 				5215F6002846815D0089DF85 /* SearchSportsView.swift in Sources */,
 				5215F5FE28467EA30089DF85 /* SearchBarView.swift in Sources */,
