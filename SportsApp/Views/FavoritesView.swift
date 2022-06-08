@@ -12,15 +12,15 @@ import UIKit
 class FavoritesView: UIView {
     var sportsCollectionView: UICollectionView!
     var sportsRepository: SportsRepository!
+    var standings: [Standing]!
+    var navigationController: UINavigationController!
     
-    init(sportsRepository: SportsRepository) {
+    init(sportsRepository: SportsRepository, navigationController: UINavigationController) {
         super.init(frame: .zero)
         
         backgroundColor = .white
         self.sportsRepository = sportsRepository
-//        self.sportsRepository.sportsNetworkDataSource?.getPastPerformances { (pastPerformances) in
-//            print(pastPerformances)
-//        }
+        self.navigationController = navigationController
         
         buildViews()
         addConstraints()
@@ -31,6 +31,9 @@ class FavoritesView: UIView {
     }
     
     func buildViews() {
+        standings = sportsRepository.sportsDatabaseDataSource?.fetchStandings()
+        print("Broj: " + String(standings.count))
+        
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         sportsCollectionView = UICollectionView(
@@ -54,11 +57,15 @@ extension FavoritesView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return standings.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SportsViewCollectionCell.cellIdentifier, for: indexPath) as! SportsViewCollectionCell
+        
+        let standing = standings[indexPath.row]
+        cell.addText(teamId: standing.teamId)
+        
         return cell
     }
 }
@@ -67,11 +74,17 @@ extension FavoritesView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //      logic when cell is selected
         print("Clicked on cell number \(indexPath.row)")
+        
+        let standing = standings[indexPath.row]
+        let standingDetailsViewController = StandingDetailsViewController(standing: standing)
+        standingDetailsViewController.tabBarController?.selectedIndex = indexPath.row
+        
+        self.navigationController.pushViewController(standingDetailsViewController, animated: true)
     }
 }
 
 extension FavoritesView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.bounds.width, height: 140)
+        return CGSize(width: self.bounds.width, height: 60)
     }
 }

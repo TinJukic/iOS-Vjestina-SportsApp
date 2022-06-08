@@ -30,10 +30,16 @@ class SportsViewCollectionCell: UICollectionViewCell {
     func buildViews() {
         cellLabel = UILabel()
         cellLabel.text = "cell"
+        cellLabel.textAlignment = .center
         addSubview(cellLabel)
     }
     
     func addConstraints() {
         cellLabel.autoPinEdgesToSuperviewSafeArea()
+        cellLabel.autoCenterInSuperview()
+    }
+    
+    func addText(teamId: Int64) {
+        cellLabel.text = "Team with id: " + String(teamId)
     }
 }

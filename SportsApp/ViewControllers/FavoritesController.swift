@@ -35,7 +35,7 @@ class FavoritesController: UIViewController {
     }
     
     func buildViews() {
-        favoritesView = FavoritesView(sportsRepository: sportsRepository)
+        favoritesView = FavoritesView(sportsRepository: sportsRepository, navigationController: navigationController!)
         view.addSubview(favoritesView)
     }
     

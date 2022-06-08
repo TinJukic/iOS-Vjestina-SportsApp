@@ -42,7 +42,6 @@ class SportsNetworkDataSource {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
 //        urlRequest.allHTTPHeaderFields = headersPlayersCroatia
-        print(urlRequest.url)
         networkService.executeUrlRequest(urlRequest) { (result: Result<Players, RequestError>) in
             switch result {
                 case .success(let success):

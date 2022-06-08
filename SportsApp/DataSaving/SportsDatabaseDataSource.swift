@@ -17,7 +17,48 @@ class SportsDatabaseDataSource {
     }
     
     func saveStandings(standings: StandingsReq) {
+        do {
+            try standings.data.standings.forEach({ standing in
+                let standingInDatabase = fetchStanding(withId: standing.teamId!)
+                
+                if(standingInDatabase != nil) {
+                    updateStanding(standingReq: standing, standing: standingInDatabase!)
+                } else {
+                    saveStanding(standing: standing)
+                }
+                
+                try managedContext.save()
+            })
+        } catch let error as NSError {
+            print("Error \(error): \(error.userInfo)")
+        }
+    }
+    
+    func fetchStandings() -> [Standing] {
+        let request: NSFetchRequest<Standing> = Standing.fetchRequest()
+        let sort = NSSortDescriptor(key: "points", ascending: true)
+        request.sortDescriptors = [sort]
         
+        do {
+            return try managedContext.fetch(request)
+        } catch let error as NSError {
+            print("Error \(error): \(error.userInfo)")
+            return []
+        }
+    }
+    
+    func fetchStanding(withId id: Int64) -> Standing? {
+        let request: NSFetchRequest<Standing> = Standing.fetchRequest()
+        let predicate = NSPredicate(format: "teamId = %@", "\(id)")
+        request.predicate = predicate
+        request.fetchLimit = 1
+        
+        do {
+            return try managedContext.fetch(request).first
+        } catch let error as NSError {
+            print("Error \(error): \(error.userInfo)")
+            return nil
+        }
     }
     
     func savePlayers(players: Players?) {
@@ -135,7 +176,7 @@ class SportsDatabaseDataSource {
         newStanding.teamId = Int64(standing.teamId ?? -1)
         newStanding.points = Int32(standing.points ?? -1)
         newStanding.status = standing.status!
-        newStanding.result = standing.result!
+        newStanding.result = standing.result ?? ""
         newStanding.overall = saveOverall(overall: standing.overall)
         newStanding.home = saveOverall(overall: standing.home)
         newStanding.away = saveOverall(overall: standing.away)
