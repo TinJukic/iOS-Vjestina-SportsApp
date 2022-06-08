@@ -16,7 +16,7 @@ class SportsViewCollectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = .systemGreen
+        self.backgroundColor = .systemGray5
         self.layer.cornerRadius = 10
         
         buildViews()

@@ -30,7 +30,7 @@ class StatusView: UIView {
     init(overall: Overall) {
         super.init(frame: .zero)
         
-        self.backgroundColor = .systemGray
+        self.backgroundColor = .white
         self.overall = overall
         
         buildViews()

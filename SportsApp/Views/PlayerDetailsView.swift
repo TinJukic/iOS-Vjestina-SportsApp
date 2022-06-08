@@ -39,19 +39,24 @@ class PlayerDetailsView: UIView {
     
     func buildViews() {
         playerImage = UIImageView()
-        DispatchQueue.global().async {
-            do {
-                let urlString = self.player.img ?? ""
-                if(urlString != "") {
-                    let url = URL(string: urlString)!
-                    let data = try Data(contentsOf: url)
-                    
-                    DispatchQueue.main.async {
-                        self.playerImage.image = UIImage(data: data)
+        self.playerImage.image = UIImage(systemName: "person")
+        self.playerImage.tintColor = .systemGreen
+        if(self.player.img != "") {
+            playerImage.image = nil
+            DispatchQueue.global().async {
+                do {
+                    let urlString = self.player.img ?? ""
+                    if(urlString != "") {
+                        let url = URL(string: urlString)!
+                        let data = try Data(contentsOf: url)
+                        
+                        DispatchQueue.main.async {
+                            self.playerImage.image = UIImage(data: data)
+                        }
                     }
+                } catch {
+                    print(error)
                 }
-            } catch {
-                print(error)
             }
         }
         addSubview(playerImage)
@@ -124,31 +129,31 @@ class PlayerDetailsView: UIView {
     
     func addConstraints() {
         playerImage.autoSetDimensions(to: CGSize(width: 120, height: 140))
-        playerImage.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 10)
-        playerImage.autoPinEdge(toSuperviewSafeArea: .top, withInset: 10)
+        playerImage.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 0)
+        playerImage.autoPinEdge(toSuperviewSafeArea: .top, withInset: 0)
         
         nameAgeLabel.autoPinEdge(.leading, to: .trailing, of: playerImage, withOffset: 20)
-        nameAgeLabel.autoPinEdge(toSuperviewSafeArea: .trailing, withInset: 10)
+        nameAgeLabel.autoPinEdge(toSuperviewSafeArea: .trailing, withInset: 0)
         nameAgeLabel.autoPinEdge(toSuperviewSafeArea: .top, withInset: 10)
         
         countryName.autoPinEdge(.leading, to: .trailing, of: playerImage, withOffset: 20)
         countryName.autoPinEdge(.top, to: .bottom, of: nameAgeLabel, withOffset: 10)
-        countryName.autoPinEdge(toSuperviewSafeArea: .trailing, withInset: 10)
+        countryName.autoPinEdge(toSuperviewSafeArea: .trailing, withInset: 0)
         
         dateLabel.autoPinEdge(.top, to: .bottom, of: playerImage, withOffset: 20)
-        dateLabel.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 10)
+        dateLabel.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 0)
         
         birthdayLabel.autoPinEdge(.top, to: .bottom, of: playerImage, withOffset: 20)
         birthdayLabel.autoPinEdge(.leading, to: .trailing, of: dateLabel, withOffset: 10)
         
         heightLabel.autoPinEdge(.top, to: .bottom, of: birthdayLabel, withOffset: 20)
-        heightLabel.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 10)
+        heightLabel.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 0)
         
         height.autoPinEdge(.top, to: .bottom, of: birthdayLabel, withOffset: 20)
         height.autoPinEdge(.leading, to: .trailing, of: heightLabel, withOffset: 10)
         
         weightLabel.autoPinEdge(.top, to: .bottom, of: height, withOffset: 20)
-        weightLabel.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 10)
+        weightLabel.autoPinEdge(toSuperviewSafeArea: .leading, withInset: 0)
         
         weight.autoPinEdge(.top, to: .bottom, of: height, withOffset: 20)
         weight.autoPinEdge(.leading, to: .trailing, of: weightLabel, withOffset: 10)

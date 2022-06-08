@@ -48,6 +48,9 @@ class PlayerDetailsViewController: UIViewController {
     }
     
     func addConstraints() {
-        playerDetailsView.autoPinEdgesToSuperviewSafeArea()
+        playerDetailsView.autoPinEdge(toSuperviewEdge: .leading, withInset: 20)
+        playerDetailsView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 20)
+        playerDetailsView.autoPinEdge(toSuperviewEdge: .top, withInset: 20)
+        playerDetailsView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
     }
 }

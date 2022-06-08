@@ -34,7 +34,7 @@ class StandingDetailsView: UIScrollView {
     init(sportsRepository: SportsRepository, standing: Standing) {
         super.init(frame: .zero)
         
-        backgroundColor = .systemBlue
+        backgroundColor = .white
         self.sportsRepository = sportsRepository
         self.standing = standing
         

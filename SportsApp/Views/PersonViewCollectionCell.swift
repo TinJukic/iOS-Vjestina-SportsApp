@@ -18,7 +18,7 @@ class PersonViewCollectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = .systemGreen
+        self.backgroundColor = .systemGray5
         self.layer.cornerRadius = 10
         
         buildViews()
@@ -46,6 +46,7 @@ class PersonViewCollectionCell: UICollectionViewCell {
         
         // postavljanje slike
         if(imageLink != "") {
+            self.playerImage.image = nil
             DispatchQueue.global().async {
                 do {
                     let url = URL(string: self.imageLink)!
@@ -58,10 +59,18 @@ class PersonViewCollectionCell: UICollectionViewCell {
                     print(error)
                 }
             }
+        } else {
+            self.playerImage.image = UIImage(systemName: "person")
+            self.playerImage.tintColor = .systemGreen
         }
         
         self.addSubview(playerImage)
         playerImage.autoPinEdgesToSuperviewEdges()
         playerImage.layer.cornerRadius = 10
+    }
+    
+    override func prepareForReuse() {
+        self.imageLink = ""
+        self.playerImage.image = nil
     }
 }
