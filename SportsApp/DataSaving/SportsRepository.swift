@@ -23,5 +23,10 @@ class SportsRepository {
     
     func appLaunch() {
         print("Updating database...")
+        sportsNetworkDataSource?.getPlayers(completionHandler: { (players) in
+//            print(players)
+            // ovdje sada pozivam spremanje podataka u bazu podataka
+            self.sportsDatabaseDataSource?.savePlayers(players: players)
+        })
     }
 }

@@ -12,11 +12,16 @@ import CoreData
 
 class SportsView: UIView {
     var sportsCollectionView: UICollectionView!
+    var sportsRepository: SportsRepository!
+    var players: [Player]!
+    var navigationController: UINavigationController!
     
-    init() {
+    init(sportsRepository: SportsRepository, navigationController: UINavigationController) {
         super.init(frame: .zero)
         
         self.backgroundColor = .white
+        self.sportsRepository = sportsRepository
+        self.navigationController = navigationController
         
         buildViews()
         addConstraints()
@@ -27,6 +32,9 @@ class SportsView: UIView {
     }
     
     func buildViews() {
+        players = sportsRepository.sportsDatabaseDataSource?.fetchPlayers()
+        print(players.count)
+        
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         sportsCollectionView = UICollectionView(
@@ -34,9 +42,13 @@ class SportsView: UIView {
             collectionViewLayout: flowLayout
         )
         self.addSubview(sportsCollectionView)
-        sportsCollectionView.register(SportsViewCollectionCell.self, forCellWithReuseIdentifier: SportsViewCollectionCell.cellIdentifier)
+        sportsCollectionView.register(PersonViewCollectionCell.self, forCellWithReuseIdentifier: PersonViewCollectionCell.cellIdentifier)
         sportsCollectionView.dataSource = self
         sportsCollectionView.delegate = self
+        
+        if(players.count > 0) {
+            self.sportsCollectionView.reloadData()
+        }
     }
     
     func addConstraints() {
@@ -50,11 +62,15 @@ extension SportsView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return players.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SportsViewCollectionCell.cellIdentifier, for: indexPath) as! SportsViewCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SportsViewCollectionCell.cellIdentifier, for: indexPath) as! PersonViewCollectionCell
+        
+        cell.setImage(imageLink: players[indexPath.row].img ?? "")
+        cell.layer.cornerRadius = 10
+        
         return cell
     }
 }
@@ -63,11 +79,17 @@ extension SportsView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //      logic when cell is selected
         print("Clicked on cell number \(indexPath.row)")
+        
+        let player = players[indexPath.row]
+        let playerDetailsViewController = PlayerDetailsViewController(player: player)
+        playerDetailsViewController.tabBarController?.selectedIndex = indexPath.row
+        
+        self.navigationController.pushViewController(playerDetailsViewController, animated: true)
     }
 }
 
 extension SportsView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.bounds.width, height: 140)
+        return CGSize(width: 120, height: 140)
     }
 }

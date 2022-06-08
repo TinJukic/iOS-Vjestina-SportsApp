@@ -9,6 +9,73 @@ import Foundation
 import UIKit
 
 // API KEY: 17c1754b1bmsh2e42d8b8558af56p1aa1ebjsn5fcab1dc223c
+// Croatia: 34
+
+struct QueryPlayer: Codable {
+    let apikey: String
+    let countryId: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case apikey
+        case countryId = "country_id"
+    }
+}
+
+struct Players: Codable {
+    let query: QueryPlayer
+    let data: [PlayerDeatails]
+}
+
+struct PlayerDeatails: Codable {
+    let playerId: Int?
+    let firstName: String?
+    let lastName: String?
+    let birthday: String?
+    let age: Int?
+    let weight: Int?
+    let height: Int?
+    let img: String?
+    let country: PlayerCountry
+    
+    enum CodingKeys: String, CodingKey {
+        case playerId = "player_id"
+        case firstName = "firstname"
+        case lastName = "lastname"
+        case birthday
+        case age
+        case weight
+        case height
+        case img
+        case country
+    }
+}
+
+struct PlayerCountry: Codable {
+    let countryId: Int
+    let name: String
+    let countryCode: String
+    let continent: String
+    
+    enum CodingKeys: String, CodingKey {
+        case countryId = "country_id"
+        case name
+        case countryCode = "country_code"
+        case continent
+    }
+}
+
+//struct PlayerInfo: Codable {
+//    let query: QueryPlayer
+//    let data: Player
+//}
+
+struct Matches: Codable {
+    let data: [Match]
+}
+
+struct Match: Codable {
+    let matchData: [String : [Match]]
+}
 
 struct PastPerformances: Codable {
     let data: [String : [PastPerformance]]

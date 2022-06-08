@@ -60,11 +60,11 @@ class SportsViewController: UIViewController {
             searchBarView = SearchBarView(delegate: self)
             view.addSubview(searchBarView)
             
-            searchSportsView = SearchSportsView(searchBarView: searchBarView)
+            searchSportsView = SearchSportsView(searchBarView: searchBarView, navigationController: navigationController!, sportsRepository: sportsRepository)
             searchSportsView.isHidden = true
             view.addSubview(searchSportsView)
             
-            sportsView = SportsView()
+            sportsView = SportsView(sportsRepository: sportsRepository, navigationController: navigationController!)
             view.addSubview(sportsView)
             
         } else {

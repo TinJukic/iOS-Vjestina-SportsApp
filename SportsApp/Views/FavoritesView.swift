@@ -18,9 +18,9 @@ class FavoritesView: UIView {
         
         backgroundColor = .white
         self.sportsRepository = sportsRepository
-        self.sportsRepository.sportsNetworkDataSource?.getPastPerformances { (pastPerformances) in
-            print(pastPerformances)
-        }
+//        self.sportsRepository.sportsNetworkDataSource?.getPastPerformances { (pastPerformances) in
+//            print(pastPerformances)
+//        }
         
         buildViews()
         addConstraints()

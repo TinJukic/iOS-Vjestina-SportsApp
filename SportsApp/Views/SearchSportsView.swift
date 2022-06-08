@@ -11,11 +11,16 @@ import PureLayout
 
 class SearchSportsView: UIView {
     var sportsCollectionView: UICollectionView!
+    var navigationController: UINavigationController!
+    var sportsRepository: SportsRepository!
+    var players: [Player]!
     
-    init(searchBarView: SearchBarView) {
+    init(searchBarView: SearchBarView, navigationController: UINavigationController, sportsRepository: SportsRepository) {
         super.init(frame: .zero)
         
         backgroundColor = .yellow
+        self.navigationController = navigationController
+        self.sportsRepository = sportsRepository
         
         searchBarView.typingDelegate = self
         
@@ -28,6 +33,9 @@ class SearchSportsView: UIView {
     }
     
     func buildViews() {
+        players = sportsRepository.sportsDatabaseDataSource?.fetchPlayers()
+        print(players.count)
+        
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
         sportsCollectionView = UICollectionView(
@@ -35,7 +43,7 @@ class SearchSportsView: UIView {
             collectionViewLayout: flowLayout
         )
         self.addSubview(sportsCollectionView)
-        sportsCollectionView.register(SportsViewCollectionCell.self, forCellWithReuseIdentifier: SportsViewCollectionCell.cellIdentifier)
+        sportsCollectionView.register(PersonViewCollectionCell.self, forCellWithReuseIdentifier: PersonViewCollectionCell.cellIdentifier)
         sportsCollectionView.dataSource = self
         sportsCollectionView.delegate = self
     }
@@ -50,10 +58,12 @@ extension SearchSportsView: SearchBarTypingProtocol {
         print(text)
         
         if text == "" {
-            
+            players = sportsRepository.sportsDatabaseDataSource?.fetchPlayers()
         } else {
-            
+            players = sportsRepository.sportsDatabaseDataSource?.searchPlayers(lastName: text)
         }
+        
+        sportsCollectionView.reloadData()
     }
 }
 
@@ -63,11 +73,15 @@ extension SearchSportsView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return players.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SportsViewCollectionCell.cellIdentifier, for: indexPath) as! SportsViewCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SportsViewCollectionCell.cellIdentifier, for: indexPath) as! PersonViewCollectionCell
+        
+        let person = players[indexPath.row]
+        cell.setImage(imageLink: person.img ?? "")
+        
         return cell
     }
 }
@@ -76,11 +90,17 @@ extension SearchSportsView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //      logic when cell is selected
         print("Clicked on cell number \(indexPath.row)")
+        
+        let player = players[indexPath.row]
+        let playerDetailsViewController = PlayerDetailsViewController(player: player)
+        playerDetailsViewController.tabBarController?.selectedIndex = indexPath.row
+        
+        self.navigationController.pushViewController(playerDetailsViewController, animated: true)
     }
 }
 
 extension SearchSportsView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.bounds.width, height: 140)
+        return CGSize(width: 120, height: 140)
     }
 }
