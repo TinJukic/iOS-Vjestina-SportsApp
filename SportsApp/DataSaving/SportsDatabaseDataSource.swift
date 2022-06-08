@@ -16,6 +16,10 @@ class SportsDatabaseDataSource {
         self.managedContext = managedContext
     }
     
+    func saveStandings(standings: StandingsReq) {
+        
+    }
+    
     func savePlayers(players: Players?) {
         // ovdje spremam igrace
         do {
@@ -123,5 +127,53 @@ class SportsDatabaseDataSource {
         country.id = Int64(countryDetails.countryId)
         
         return country
+    }
+    
+    func saveStanding(standing: StandingDetails) {
+        let newStanding = Standing(context: managedContext)
+        
+        newStanding.teamId = Int64(standing.teamId ?? -1)
+        newStanding.points = Int32(standing.points ?? -1)
+        newStanding.status = standing.status!
+        newStanding.result = standing.result!
+        newStanding.overall = saveOverall(overall: standing.overall)
+        newStanding.home = saveOverall(overall: standing.home)
+        newStanding.away = saveOverall(overall: standing.away)
+    }
+    
+    func updateStanding(standingReq: StandingDetails, standing: Standing) {
+        standing.teamId = Int64(standingReq.teamId ?? -1)
+        standing.points = Int32(standingReq.points ?? -1)
+        standing.status = standingReq.status
+        standing.result = standingReq.result
+        standing.overall = updateOverall(overallReq: standingReq.overall, overall: standing.overall!)
+        standing.home = updateOverall(overallReq: standingReq.home, overall: standing.home!)
+        standing.away = updateOverall(overallReq: standingReq.away, overall: standing.away!)
+    }
+    
+    func saveOverall(overall: Overalls) -> Overall {
+        let newOverall = Overall(context: managedContext)
+        
+        newOverall.gamesPlayed = overall.gamesPlayed
+        newOverall.won = overall.won
+        newOverall.draw = overall.draw
+        newOverall.lost = overall.lost
+        newOverall.goalsDiff = overall.goalsDiff
+        newOverall.goalsScored = overall.goalsScored
+        newOverall.goalsAgainst = overall.goalsAgainst
+        
+        return newOverall
+    }
+    
+    func updateOverall(overallReq: Overalls, overall: Overall) -> Overall {
+        overall.gamesPlayed = overallReq.gamesPlayed
+        overall.won = overallReq.won
+        overall.draw = overallReq.draw
+        overall.lost = overallReq.lost
+        overall.goalsDiff = overallReq.goalsDiff
+        overall.goalsScored = overallReq.goalsScored
+        overall.goalsAgainst = overallReq.goalsAgainst
+        
+        return overall
     }
 }

@@ -55,22 +55,21 @@ class SportsNetworkDataSource {
             }
     }
     
-//    var pastPerformances: PastPerformances?
-//    func getPastPerformances(completionHandler: @escaping (_ pastPerformances: PastPerformances?) -> Void) {
-//        let urlRequestString = "https://football-prediction-api.p.rapidapi.com/api/v2/performance-stats?market=classic"
-//        guard let url = URL(string: urlRequestString) else { return }
-//        var urlRequest = URLRequest(url: url)
-//        urlRequest.httpMethod = "GET"
-//        urlRequest.allHTTPHeaderFields = headers
-//        networkService.executeUrlRequest(urlRequest) { (result: Result<PastPerformances, RequestError>) in
-//            switch result {
-//            case .success(let success):
-//                print("Podaci su dohvaceni")
-//                self.pastPerformances = success
-//                completionHandler(self.pastPerformances)
-//            case .failure(let failure):
-//                print("Failure in getPastPerformances, \(failure)")
-//            }
-//        }
-//    }
+    var standingReq: StandingsReq?
+    func getStandings(completionHandler: @escaping (_ standingsReq: StandingsReq) -> Void) {
+        let urlRequestString = "https://app.sportdataapi.com/api/v1/soccer/standings?apikey=c9ba4d60-e6a4-11ec-9fca-9d1fad038049&season_id=496"
+        guard let url = URL(string: urlRequestString) else { return }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
+        networkService.executeUrlRequest(urlRequest) { (result: Result<StandingsReq, RequestError>) in
+            switch result {
+            case .success(let success):
+                print("Podaci za standings su dohvaceni")
+                self.standingReq = success
+                completionHandler(self.standingReq!)
+            case .failure(let failure):
+                print("Failure in getStandings, \(failure)")
+            }
+        }
+    }
 }

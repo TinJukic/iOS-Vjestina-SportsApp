@@ -7,6 +7,18 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="players" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Player" inverseName="country" inverseEntity="Player"/>
     </entity>
+    <entity name="Overall" representedClassName="Overall" syncable="YES">
+        <attribute name="draw" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="gamesPlayed" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="goalsAgainst" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="goalsDiff" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="goalsScored" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lost" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="won" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="away" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Standing" inverseName="away" inverseEntity="Standing"/>
+        <relationship name="home" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Standing" inverseName="home" inverseEntity="Standing"/>
+        <relationship name="overall" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Standing" inverseName="overall" inverseEntity="Standing"/>
+    </entity>
     <entity name="Player" representedClassName="Player" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="birthday" optional="YES" attributeType="String"/>
@@ -18,8 +30,19 @@
         <attribute name="weight" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="players" inverseEntity="Country"/>
     </entity>
+    <entity name="Standing" representedClassName="Standing" syncable="YES">
+        <attribute name="points" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="result" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="teamId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="away" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Overall" inverseName="away" inverseEntity="Overall"/>
+        <relationship name="home" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Overall" inverseName="home" inverseEntity="Overall"/>
+        <relationship name="overall" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Overall" inverseName="overall" inverseEntity="Overall"/>
+    </entity>
     <elements>
         <element name="Player" positionX="-63" positionY="-18" width="128" height="164"/>
         <element name="Country" positionX="-54" positionY="54" width="128" height="104"/>
+        <element name="Standing" positionX="-45" positionY="81" width="128" height="134"/>
+        <element name="Overall" positionX="-36" positionY="90" width="128" height="179"/>
     </elements>
 </model>

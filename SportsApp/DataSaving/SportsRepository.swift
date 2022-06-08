@@ -28,5 +28,10 @@ class SportsRepository {
             // ovdje sada pozivam spremanje podataka u bazu podataka
             self.sportsDatabaseDataSource?.savePlayers(players: players)
         })
+        
+        sportsNetworkDataSource?.getStandings(completionHandler: { (standingsReq) in
+//            print(standingsReq)
+            // ovdje sada pozivam spremanje podataka u bazu podataka
+        })
     }
 }
