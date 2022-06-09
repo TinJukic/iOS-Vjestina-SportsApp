@@ -149,8 +149,8 @@ class StandingDetailsView: UIScrollView {
         resultLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 0)
         resultLabel.autoPinEdge(.top, to: .bottom, of: statusLabel, withOffset: 10)
         
-        result.autoPinEdge(.leading, to: .trailing, of: status, withOffset: 10)
-        result.autoPinEdge(.top, to: .bottom, of: id, withOffset: 10)
+        result.autoPinEdge(.leading, to: .trailing, of: resultLabel, withOffset: 10)
+        result.autoPinEdge(.top, to: .bottom, of: status, withOffset: 10)
         
         pointsLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 0)
         pointsLabel.autoPinEdge(.top, to: .bottom, of: resultLabel, withOffset: 10)
@@ -159,7 +159,7 @@ class StandingDetailsView: UIScrollView {
         points.autoPinEdge(.top, to: .bottom, of: result, withOffset: 10)
         
         overallLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 0)
-        overallLabel.autoPinEdge(.top, to: .bottom, of: points, withOffset: 60)
+        overallLabel.autoPinEdge(.top, to: .bottom, of: points, withOffset: 30)
         
         overallView.autoPinEdge(toSuperviewEdge: .leading, withInset: 0)
         overallView.autoPinEdge(.top, to: .bottom, of: overallLabel, withOffset: 10)

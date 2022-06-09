@@ -37,7 +37,7 @@ class SportsNetworkDataSource {
     
     var players: Players?
     func getPlayers(completionHandler: @escaping (_ players: Players?) -> Void) {
-        let urlRequestString = "https://app.sportdataapi.com/api/v1/soccer/players?apikey=c9ba4d60-e6a4-11ec-9fca-9d1fad038049&country_id=34"
+        let urlRequestString = "https://app.sportdataapi.com/api/v1/soccer/players?apikey=c9ba4d60-e6a4-11ec-9fca-9d1fad038049&country_id=35"
         guard let url = URL(string: urlRequestString) else { return }
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
